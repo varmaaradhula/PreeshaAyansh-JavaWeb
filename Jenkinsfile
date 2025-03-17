@@ -91,7 +91,7 @@ pipeline {
                     fi
 
                     # Extract the previous build number
-                    OLD_BUILD_NUMBER=$(grep -oP 'image: varmaaradhula/preeaya:\\K[0-9]+' PreeshaAyansh_deployments/MyApp.yml || echo "")
+                    OLD_BUILD_NUMBER=$(grep -oP 'image: varmaaradhula/preeaya:\\K[0-9]+' PreeshaAyansh_deployments/MyApp.yaml || echo "")
 
                     if [ -z "$OLD_BUILD_NUMBER" ]; then
                         echo "Error: Could not extract previous build number"
@@ -100,11 +100,11 @@ pipeline {
 
                     # Update deployment file with new image tag
                     echo "Replacing old build number ($OLD_BUILD_NUMBER) with new build number ($BUILD_NUMBER)"
-                    sed -i.bak -e "s/$OLD_BUILD_NUMBER/${BUILD_NUMBER}/g" PreeshaAyansh_deployments/MyApp.yml
-                    rm -f PreeshaAyansh_deployments/MyApp.yml.bak  # Cleanup backup file
+                    sed -i.bak -e "s/$OLD_BUILD_NUMBER/${BUILD_NUMBER}/g" PreeshaAyansh_deployments/MyApp.yaml
+                    rm -f PreeshaAyansh_deployments/MyApp.yaml.bak  # Cleanup backup file
 
                     # Commit and push changes
-                    git add PreeshaAyansh_deployments/MyApp.yml
+                    git add PreeshaAyansh_deployments/MyApp.yaml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push origin ${GIT_BRANCH}
                 '''
