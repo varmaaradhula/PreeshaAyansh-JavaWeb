@@ -18,7 +18,7 @@ pipeline {
 
   stage("CheckStyle reports"){
             steps{
-                sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn checkstyle:checkstyle'
+                sh 'mvn checkstyle:checkstyle'
             }
         }
 
